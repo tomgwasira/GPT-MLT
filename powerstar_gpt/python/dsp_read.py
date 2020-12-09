@@ -6,6 +6,9 @@
 # Version: 1.0
 #**********************************************************************
 
+
+
+
 # #test
 # # open the serial port on the Raspberry Pi and get information from the Powerstar Card.
 
