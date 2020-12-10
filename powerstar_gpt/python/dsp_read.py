@@ -1,31 +1,19 @@
-#**********************************************************************
 # Routine for reading data from DSP on inverter board into Raspberry Pi
 #
-# Author: Thomas Gwasira, MLT Power
+# Author: Alex, Thomas Gwasira: MLT Power
 # Date: 09/12/2020
 # Version: 1.0
-#**********************************************************************
 
+import serial
 
+# Setup UART
+ser = serial.Serial('/dev/serial0', 115200) # open serial port for primary UART (miniUART) with baud rate 115200
+ser.timeout = 20
+ser.flushInput() # clear input serial buffer
 
-
-# #test
-# # open the serial port on the Raspberry Pi and get information from the Powerstar Card.
-
-# import scipy # for FFTs
-# import math
-# import matplotlib.pyplot as plt
-# import numpy as np
-# # import scipy as sc
-# from scipy.fftpack import fft, ifft
-# from pylab import *
-# """
-# ser = serial.Serial('/dev/serial0', 115200)
-# ser.timeout = 20
-# ser.flushInput()
-
-# # get data from the powerstar 10 card
-# ser.write(b'-twh\r-tw\r'); result = ser.read(6000); result.split("\r")
+# Read data from Powerstar 10 card
+ser.write(b'-twh\r-tw\r');
+result = ser.read(6000); result.split("\r")
 # ser.close()
 
 # # convert the result into an array of numbers, first split up the string, and then convert to ints
