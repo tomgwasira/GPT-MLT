@@ -1,19 +1,33 @@
 # Routine for reading data from DSP on inverter board into Raspberry Pi
 #
-# Author: Alex, MLT Power
+# Author: Thomas Gwasira, MLT Power
 # Date: 09/12/2020
 # Version: 1.0
 
 import serial
 
-# Setup UART
-ser = serial.Serial('/dev/serial0', 115200) # open serial port for primary UART (miniUART) with baud rate 115200
-ser.timeout = 20
-ser.flushInput() # clear input serial buffer
+# Setup primary UART (miniUART) and read from Powerstar card
+with serial.Serial('/dev/serial0', 115200, timeout=20) as ser:
+    print("Serial port opened.")
+    ser.flushInput          # clear input serial buffer
+
+    print("Reading serial connection to Powerstar card.")
+    s = ser.read(10)        # read up to ten bytes (timeout)
+
+    print(s)
+    ser.close()
+
+
+
+# ser = serial.Serial('/dev/serial0', 115200) # open serial port for primary UART (miniUART) with baud rate 115200
+# ser.timeout = 20
+# ser.flushInput() # clear input serial buffer
 
 # Read data from Powerstar 10 card
 ser.write(b'-twh\r-tw\r'); result = ser.read(6000); result.split("\r")
 ser.close()
+
+print("Hi. I'm Tom.")
 
 # convert the result into an array of numbers, first split up the string, and then convert to ints
 result_temp = result.split("\r")
@@ -54,7 +68,7 @@ src_v_inphase=[0]*total_samples
 sink_f = 50 # starting reference frequency
 sink_amplitude=300
 sum_vprod=0     # initial value of integral of prod of gf and src_sink_90
-gain_product=200  
+gain_product=200
 for n in range(0,total_samples):
   src_sink_90[n] = sink_amplitude*math.cos((2 * math.pi * (sink_f + sum_vprod/gain_product) *n/sample_per_cycle/gf)) 
   src_sink_0[n]  = sink_amplitude*math.sin((2 * math.pi * (sink_f + sum_vprod/gain_product) *n/sample_per_cycle/gf))
