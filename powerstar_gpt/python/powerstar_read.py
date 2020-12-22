@@ -7,5 +7,5 @@
 # Version: 1.0
 
 import matplotlib.pyplot as plt
-import numpy as np
+import numpy as
 import serial
