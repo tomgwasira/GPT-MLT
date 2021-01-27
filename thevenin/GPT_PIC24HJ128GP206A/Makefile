@@ -1,0 +1,26 @@
+# MPLAB IDE generated this makefile for use with GNU make.
+# Project: Midi_Inv.mcp
+# Date: Mon Mar 01 14:59:16 2010
+
+AS = pic30-as.exe
+CC = pic30-gcc.exe
+LD = pic30-ld.exe
+AR = pic30-ar.exe
+HX = pic30-bin2hex.exe
+RM = rm
+
+Midi_Inv.hex : Midi_Inv.cof
+	$(HX) "Midi_Inv.cof"
+
+Midi_Inv.cof : main.o Sine1024.o
+	$(CC) -mcpu=24FJ128GA006 "main.o" "Sine1024.o" -o"Midi_Inv.cof" -Wl,--script="p24FJ128GA006.gld",--defsym=__MPLAB_BUILD=1,-Map="Midi_Inv.map",--report-mem
+
+main.o : Sine1024.h c:/program\ files/microchip/mplab\ c30/bin/bin/../../support/PIC24F/h/p24fj128ga006.h main.c
+	$(CC) -mcpu=24FJ128GA006 -x c -c "main.c" -o"main.o" -g -Wall
+
+Sine1024.o : Sine1024.h Sine1024.c
+	$(CC) -mcpu=24FJ128GA006 -x c -c "Sine1024.c" -o"Sine1024.o" -g -Wall
+
+clean : 
+	$(RM) "main.o" "Sine1024.o" "Midi_Inv.cof" "Midi_Inv.hex"
+
