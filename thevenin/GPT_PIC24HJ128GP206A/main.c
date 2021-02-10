@@ -434,7 +434,7 @@ void __attribute__ ((interrupt, no_auto_psv)) _SI2C1Interrupt(void)
 {
 	if(_I2COV)
 	{
-		ux_c = I2C1RCV; //clear RBF bit for address
+		ux_c = I2C1RCV; // clear RBF bit for address
 		_I2COV = 0;
 	}
 

@@ -41,5 +41,3 @@ extern const CalType Data_names[max_Data_table];
 #define	Pa_W	Data_table[8]
 #define	Pb_W	Data_table[9]
 #define	Pc_W	Data_table[10]
-
-

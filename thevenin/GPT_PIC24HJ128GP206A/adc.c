@@ -183,17 +183,18 @@ void ADC_measure_all(void)
 	Calc_temp /= 1024;							//Cant >> signed values
 	Vext_AVG_temp += Calc_temp;		
 
-	
+    
+    ///// ~ Change sampling rate if more or less than 128 samples /////
 	if(((Va_old < 0) && (Va_temp >= 0)) || (Zero_cross > 200))
 	{
 		//Using Va as the reference for the grid frequency
 		//We always want 128 samples per cycle, so we update the timer 3 period register
 		//so that we always have 128 interrupts per cycle
-		if((Zero_cross > 127) && (PR3 < 7102)) PR3++;		//Grid frequency is lower
+		if((Zero_cross > 127) && (PR3 < 7102)) PR3++;		//Grid frequency is lower ~ because of Zero_cross at 128 that means we are at sample 129 which is already too much, so we need to check if Zero_cross at 127 meaning we are at sample 128 which is enough. Greater than 127 means do something to sample rate. 
 		if((Zero_cross < 127) && (PR3 > 4807)) PR3--;		//Grid frequency is higher
 		
 		Zero_cross = 0;	//Check for source voltage zero-crossing;
-		Calc_a = 1;
+		Calc_a = 1; // ~ Used to mark when there is one complete cycle. This is required for power calculations later on.
 	}
 	else
 	{
@@ -294,7 +295,7 @@ void ADC_measure_all(void)
 		Vext_AVG_temp = 0;
 	}	
 
-	VaWave[waveCounter] = Va_temp;
+	VaWave[waveCounter] = Va_temp;  // ~ VaWave is an array of 256 int values
 	VbWave[waveCounter] = Vb_temp;
 	VcWave[waveCounter] = Vc_temp;
 	IaWave[waveCounter] = Ia_temp;
