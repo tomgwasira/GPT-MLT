@@ -28,18 +28,24 @@
         </data>
         <spellchecker-wordlist xmlns="http://www.netbeans.org/ns/spellchecker-wordlist/1">
             <word>comms</word>
+            <word>ece</word>
+            <word>edu</word>
             <word>Gwasira</word>
+            <word>https</word>
             <word>Initialisations</word>
             <word>Initialise</word>
             <word>Initialises</word>
             <word>initially</word>
             <word>int</word>
+            <word>pdf</word>
+            <word>peckol</word>
             <word>prescaler</word>
             <word>prev</word>
             <word>Thevenin</word>
             <word>tomgwasira</word>
             <word>uart</word>
             <word>uninitialised</word>
+            <word>uw</word>
         </spellchecker-wordlist>
     </configuration>
 </project>

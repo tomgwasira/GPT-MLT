@@ -9,9 +9,23 @@
 *******************************************************************************/
 
 #include "p24hj128gp206a.h"
+
+#include "global.h"
 #include "timers.h"
-#include "tables.h"
-#include "UART.h"
+//#include "tables.h"
+//#include "UART.h"
+
+//unsigned int Timer_1ms;
+unsigned int PR3_calc;
+unsigned int PR3_50Hz;
+unsigned int PR3_53Hz;
+
+
+/*-----------------------------------------------------------------
+ Global variables
+-----------------------------------------------------------------*/
+unsigned char seconds;
+unsigned char prev_seconds;
 
 //-----------------------------------------------------------------
 //Timer 4 Initialisation

@@ -37,66 +37,6 @@ void UART_Init(void)
 }
 
 //-----------------------------------------------------------------
-//Perform an I2C start operation.
-//-----------------------------------------------------------------
-void startI2C1(void) {
-  unsigned char u8_wdtState;
-
-  u8_wdtState = _SWDTEN;  //save WDT state
-  _SWDTEN = 1; //enable WDT
-  I2C1CONbits.SEN = 1;   // initiate start
-  // wait until start finished
-  while (I2C1CONbits.SEN);
-  _SWDTEN = u8_wdtState;  //restore WDT
-
-}
-
-//-----------------------------------------------------------------
-//Perform an I2C repeated start operation.
-//-----------------------------------------------------------------
-void rstartI2C1(void) {// repeated start
-  unsigned char u8_wdtState;
-
-  u8_wdtState = _SWDTEN;  //save WDT state
-  _SWDTEN = 1;  //enable WDT
-  I2C1CONbits.RSEN = 1;   // initiate start
-  // wait until start finished
-  while (I2C1CONbits.RSEN);
-  _SWDTEN = u8_wdtState;  //restore WDT
-
-}
-
-//-----------------------------------------------------------------
-//Perform an I2C stop operation.
-//-----------------------------------------------------------------
-void stopI2C1(void) {
-  unsigned char u8_wdtState;
-
-  u8_wdtState = _SWDTEN;  //save WDT state
-  _SWDTEN = 1;  //enable WDT
-  I2C1CONbits.PEN=1;     // initiate stop, PEN=1
-  //wait until stop finished
-  while (I2C1CONbits.PEN);
-  _SWDTEN = u8_wdtState;  //restore WDT
-
-}
-//-----------------------------------------------------------------
-//i2c Initialisation
-//-----------------------------------------------------------------
-void i2c_Init(void)
-{
-	
-	I2C1BRG = 49;
-	I2C1CON = 0b1001000100000000;
-	I2C1ADD = SLAVE_I2C_ADDR>>1;   //initialize the address register	
-	
-	_SI2C1IF = 0;
-	_SI2C1IP = 6;				//High priority
-	_SI2C1IE = 1;                //enable ISR
-	
-}
-
-//-----------------------------------------------------------------
 //Transmits a single byte on the debug port
 //-----------------------------------------------------------------
 void UART_char_Tx(unsigned char ch)
