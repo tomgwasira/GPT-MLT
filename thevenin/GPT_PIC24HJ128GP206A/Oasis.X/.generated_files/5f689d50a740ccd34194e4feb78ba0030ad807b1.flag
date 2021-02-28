@@ -1,1 +1,0 @@
- -c -mcpu=$(MP_PROCESSOR_OPTION)  -omf=elf -DXPRJ_default=$(CND_CONF)  -no-legacy-libc  -I".." -I"." -Wa,-g,--relax,-ahl,-g$(MP_EXTRA_AS_POST)  -mdfp="${DFP_DIR}/xc16"C:\Users\Thomas\Documents\GPT-MLT\thevenin\GPT_PIC24HJ128GP206A\Flash Operations.s

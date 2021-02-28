@@ -1,9 +1,10 @@
 /*********************************************************************************************
 *
-* File:         i2c.c 
-* Written by:   Thomas Gwasira (tomgwasira@gmail.com), MLT Power
-* Date:         19 February 2020
-* Version:      1.00
+* File:                 i2c.c 
+* Author:               Thomas Gwasira (tomgwasira@gmail.com), MLT Power
+* Original code by:     Stanley Adams (stanley@mltinverters.com), MLT Power
+* Date:                 February 2020
+* Version:              1.00
 * 
 * Functionality:
 * This code implements the basic functions for use of the PIC24HJ128GP206A as an I2C slave 
@@ -13,38 +14,29 @@
 *********************************************************************************************/
 
 #include "p24hj128gp206a.h"
-#include <xc.h>
 
-#include "i2c.h"
 #include "global.h"
+#include "i2c.h"
 
-volatile SAMPLE_TYPE current_i2c_sample = sample_number_lower_byte; // type of sample currently being transmitted
+
 
 /* Global variables */
-unsigned int i2c_transmit_buffer_index = 0; // index of value in each of the buffers currently being transmitted over i2c
-
-/*-----------------------------------------------------------------
- Global variable initialisations
------------------------------------------------------------------*/
+unsigned char bytes_transmitted = 0;
+unsigned char i2c_error;
 unsigned char i2c_state;
 unsigned char i2c_status;
-unsigned char i2cdebug;
-unsigned char i2cdebug2;
-unsigned char i2cdebug3;
-unsigned char i2cdebug4;
-unsigned char i2cdebug5;
-unsigned char i2cError;
 unsigned int i2c_timeout;
-unsigned char bytes_transmitted_during_single_i2c_request = 0;
+unsigned char i2c_transmitting = 0;
+unsigned int i2c_transmit_buffer_index = 0;
 unsigned int i2c_transmit_index = 0;
+unsigned char ux_c;
+
+/* Local variables */
+volatile SAMPLE_TYPE current_i2c_sample = sample_number_lower_byte; // type of sample currently being transmitted
+unsigned char first_transmission = 1; // flag to indicate whether the byte currently being transmitted is the first byte since program started running or since a previous 'done' flag from the MASTER. Used to extract the current index to which the buffers are being written such that transmission of samples will startfrom that index.
 
 
-unsigned char first_transmission = 1;
 
-
-/*-----------------------------------------------------------------
- Methods
------------------------------------------------------------------*/
 /**
 * Initialises I2C1.
 */
@@ -70,7 +62,7 @@ void i2cPrepare(void) {
 	}
 
 	i2c_timeout = 0; // reset timeout
-	i2cError = 0;
+	i2c_error = 0;
     i2c_status = ( I2C1STAT & SSPSTAT_BIT_MASK); // mask the status bits out from the other unimportant register bits
 }
 
@@ -160,7 +152,7 @@ void i2cTransmitBufferElement(void) {
     }
     
     I2C1CONbits.SCLREL = 1; // release clock line so MASTER can drive it
-    bytes_transmitted_during_single_i2c_request++; // increment counter for bytes transmitted during a single i2c request
+    bytes_transmitted++; // increment counter for bytes transmitted during a single i2c request
 }
 
 /**
@@ -188,20 +180,23 @@ void packetSentRoutine(void) {
     }
     
     current_i2c_sample = sample_number_lower_byte;
-    bytes_transmitted_during_single_i2c_request = 0;
+    bytes_transmitted = 0;
 }
 
 /**
  * Does reset routines for variables when MASTER sends flag to indicate that it is done reading sets of samples for all buffers
  */
 void doneReadingAllBuffersRoutine(void) {
-    i2c_transmitting_samples = I2C1RCV;  // when MASTER is done reading I2C port, it will send a 0 byte which should reset i2c_transmitting_samples variable
+    i2c_transmitting = I2C1RCV;  // when MASTER is done reading I2C port, it will send a 0 byte which should reset i2c_transmitting variable
     
-    if (!i2c_transmitting_samples) {
+    if (!i2c_transmitting) {
         first_transmission = 1; // reset flag used to indicate that a transmission is the first of a request for a set of samples
     }
 }
 
+
+
+/* The following functions are not being used. Not sure why they were included. */
 /**
  * Performs an I2C start operation.
  */

@@ -9,9 +9,6 @@
 #define	MAIN_H
 
 /* Global variables */
-unsigned char i2c_transmitting_samples = 0; // flag to indicate whether MASTER is currently reading I2C line
-unsigned char ux_c;
-
 
 /* Local variables */
 unsigned char ux_index;

@@ -1,1 +1,0 @@
- -c -mcpu=$(MP_PROCESSOR_OPTION)      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1    -omf=elf -DXPRJ_default=$(CND_CONF)  -no-legacy-libc  $(COMPARISON_BUILD)  -O1 -I".." -I"." -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"C:\Users\Thomas\Documents\GPT-MLT\thevenin\GPT_PIC24HJ128GP206A\DEE Emulation 16-bit.c

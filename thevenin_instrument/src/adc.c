@@ -1,9 +1,10 @@
 /*********************************************************************************************
 *
-* File:         adc.c 
-* Written by:   Thomas Gwasira (tomgwasira@gmail.com), MLT Power
-* Date:         February 2020
-* Version:      1.00
+* File:                 adc.c 
+* Author:               Thomas Gwasira (tomgwasira@gmail.com), MLT Power
+* Original code by:     Stanley Adams (stanley@mltinverters.com), MLT Power
+* Date:                 February 2020
+* Version:              1.00
 *
 * 
 * Functionality:
@@ -21,8 +22,6 @@
 #include "adc.h"
 
 
-
-unsigned int ADCBuffer[32] __attribute__((space(dma)));	// array of 32 int's in DMA memory space. For voltage or current, stores 4 values before buffer is refreshed.
 
 /* Global variables */
 unsigned int buffer_index = 0; // index of each of the buffers to which a value is currently being written to
@@ -45,6 +44,7 @@ int Vbackup_bat;
 int Vextn;
 
 /* Local variables */
+unsigned int ADCBuffer[32] __attribute__((space(dma)));	// array of 32 int's in DMA memory space. For voltage or current, stores 4 values before buffer is refreshed.
 unsigned int sample_count_since_i2c_start = 0; // number of samples added to buffers since I2C started transmitting. Used to pause adding to buffer if number of samples exceeded buffer size.
 unsigned int sample_number = 0; // a count of the number of samples added to ADC buffers since program started running
 
@@ -136,7 +136,7 @@ void addToBuffers(void) {
     
 	IFS0bits.AD1IF = 0;	// clear ADC interrupt flag
             
-    if (i2c_transmitting_samples) { sample_count_since_i2c_start++; } // if I2C is transmitting, increment sample count so that if buffer has been filled up while I2C is transmitting, stop adding more elements. Placed above next if statement so that first sample added to buffer means sample_count_since_i2c_start = 1
+    if (i2c_transmitting) { sample_count_since_i2c_start++; } // if I2C is transmitting, increment sample count so that if buffer has been filled up while I2C is transmitting, stop adding more elements. Placed above next if statement so that first sample added to buffer means sample_count_since_i2c_start = 1
     
     else { sample_count_since_i2c_start = 0; } // if I2C is not transmitting or done transmitting according to flag written by MASTER, reset sample count and buffer index at start of transmission
     

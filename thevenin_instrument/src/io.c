@@ -1,9 +1,10 @@
 /*********************************************************************************************
 *
-* File:         io.c 
-* Written by:   Thomas Gwasira (tomgwasira@gmail.com), MLT Power
-* Date:         February 2020
-* Version:      1.00
+* File:                 io.c 
+* Author:               Thomas Gwasira (tomgwasira@gmail.com), MLT Power
+* Original code by:     Stanley Adams (stanley@mltinverters.com), MLT Power
+* Date:                 February 2020
+* Version:              1.00
 * 
 * Functionality:
 * This code implements functions related to I/O on the PIC24HJ128GP206A including I/o pin
@@ -14,8 +15,8 @@
 #include "p24hj128gp206a.h"
 #include <xc.h>
 
-#include "io.h"
 #include "global.h"
+#include "io.h"
 
 /**
  * Initialises I/O pins. 

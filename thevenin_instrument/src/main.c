@@ -16,7 +16,7 @@
 * https://engineering.purdue.edu/ece477/Archive/2009/Spring/S09-Grp06/Code/PIC/pic24_code
 * _examples/docs/textbookexamples.html  [Accessed: Feb 2020]
 *
-*********************************************************************************************/
+**********************************************************************************************/
 
 
 /*-----------------------------------------------------------------
@@ -74,7 +74,6 @@
 #include "io.h"
 #include "i2c.h"
 #include "timers.h"
-#include "uart.h"
 #include "uart_debug.h"
 
 
@@ -149,7 +148,7 @@ void __attribute__ ((interrupt,no_auto_psv)) _T4Interrupt(void)
 		i2c_timeout = 0;
 		i2c_state = 0;
 		ux_index = 0;
-		i2cError ++;
+		i2c_error ++;
 	}	
 
 	if((Timer_1ms % 1000) == 0) seconds++;
@@ -171,7 +170,7 @@ void __attribute__ ((interrupt, no_auto_psv)) _U2RXInterrupt(void)
 	if(Debug_Buf[Debug_offset] == 13) // <CR> was received
 	{
 		Debug_cmd ++;
-		UART_printf("Got cmd.\r");
+		uartPrintf("Got cmd.\r");
 	}
 	Dbg_Len++;
 }
@@ -192,7 +191,7 @@ void __attribute__ ((interrupt, no_auto_psv)) _SI2C1Interrupt(void) {
             u8_c = I2C1RCV; // clear RBF bit for address
        
             if (I2C1STATbits.R_W) { // check the R/W bit and see if read or write transaction
-                i2c_transmitting_samples = 1; // set flag to indicate that I2C is transmitting
+                i2c_transmitting = 1; // set flag to indicate that I2C is transmitting
                 
                 I2C1TRN = 0; // transmit a 0 at the beginning of transmission of every set of samples for error checking
                 I2C1CONbits.SCLREL = 1; // release clock line  
@@ -209,7 +208,7 @@ void __attribute__ ((interrupt, no_auto_psv)) _SI2C1Interrupt(void) {
             break;
        
         case STATE_SEND_DATA_PACKET:            
-            if (bytes_transmitted_during_single_i2c_request == (NUMBER_OF_BUFFERS_TO_TRANSMIT << 1)) { // if a 'packet' containing (NUMBER_OF_BUFFERS_TO_TRANSMIT*2) bytes has been transmitted, transmit a 0, reset and go back to initial state to avoid any serious errors in case byte got corrupted while transmitting.
+            if (bytes_transmitted == (NUMBER_OF_BUFFERS_TO_TRANSMIT << 1)) { // if a 'packet' containing (NUMBER_OF_BUFFERS_TO_TRANSMIT*2) bytes has been transmitted, transmit a 0, reset and go back to initial state to avoid any serious errors in case byte got corrupted while transmitting.
                 I2C1TRN = 1; // transmit a 1 at the end of transmission of every set of samples for error checking
                 I2C1CONbits.SCLREL = 1; // release clock line
                 

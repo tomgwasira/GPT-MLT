@@ -57,17 +57,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=src/main.c src/adc.c src/timers.c src/uart_debug.c src/uart.c src/tables.c src/math.c "src/DEE Emulation 16-bit.c" "src/Flash Operations.s" src/i2c.c src/io.c
+SOURCEFILES_QUOTED_IF_SPACED=src/main.c src/adc.c src/timers.c src/uart_debug.c "src/DEE Emulation 16-bit.c" "src/Flash Operations.s" src/i2c.c src/io.c
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/src/main.o ${OBJECTDIR}/src/adc.o ${OBJECTDIR}/src/timers.o ${OBJECTDIR}/src/uart_debug.o ${OBJECTDIR}/src/uart.o ${OBJECTDIR}/src/tables.o ${OBJECTDIR}/src/math.o "${OBJECTDIR}/src/DEE Emulation 16-bit.o" "${OBJECTDIR}/src/Flash Operations.o" ${OBJECTDIR}/src/i2c.o ${OBJECTDIR}/src/io.o
-POSSIBLE_DEPFILES=${OBJECTDIR}/src/main.o.d ${OBJECTDIR}/src/adc.o.d ${OBJECTDIR}/src/timers.o.d ${OBJECTDIR}/src/uart_debug.o.d ${OBJECTDIR}/src/uart.o.d ${OBJECTDIR}/src/tables.o.d ${OBJECTDIR}/src/math.o.d "${OBJECTDIR}/src/DEE Emulation 16-bit.o.d" "${OBJECTDIR}/src/Flash Operations.o.d" ${OBJECTDIR}/src/i2c.o.d ${OBJECTDIR}/src/io.o.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/src/main.o ${OBJECTDIR}/src/adc.o ${OBJECTDIR}/src/timers.o ${OBJECTDIR}/src/uart_debug.o "${OBJECTDIR}/src/DEE Emulation 16-bit.o" "${OBJECTDIR}/src/Flash Operations.o" ${OBJECTDIR}/src/i2c.o ${OBJECTDIR}/src/io.o
+POSSIBLE_DEPFILES=${OBJECTDIR}/src/main.o.d ${OBJECTDIR}/src/adc.o.d ${OBJECTDIR}/src/timers.o.d ${OBJECTDIR}/src/uart_debug.o.d "${OBJECTDIR}/src/DEE Emulation 16-bit.o.d" "${OBJECTDIR}/src/Flash Operations.o.d" ${OBJECTDIR}/src/i2c.o.d ${OBJECTDIR}/src/io.o.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/src/main.o ${OBJECTDIR}/src/adc.o ${OBJECTDIR}/src/timers.o ${OBJECTDIR}/src/uart_debug.o ${OBJECTDIR}/src/uart.o ${OBJECTDIR}/src/tables.o ${OBJECTDIR}/src/math.o ${OBJECTDIR}/src/DEE\ Emulation\ 16-bit.o ${OBJECTDIR}/src/Flash\ Operations.o ${OBJECTDIR}/src/i2c.o ${OBJECTDIR}/src/io.o
+OBJECTFILES=${OBJECTDIR}/src/main.o ${OBJECTDIR}/src/adc.o ${OBJECTDIR}/src/timers.o ${OBJECTDIR}/src/uart_debug.o ${OBJECTDIR}/src/DEE\ Emulation\ 16-bit.o ${OBJECTDIR}/src/Flash\ Operations.o ${OBJECTDIR}/src/i2c.o ${OBJECTDIR}/src/io.o
 
 # Source Files
-SOURCEFILES=src/main.c src/adc.c src/timers.c src/uart_debug.c src/uart.c src/tables.c src/math.c src/DEE Emulation 16-bit.c src/Flash Operations.s src/i2c.c src/io.c
+SOURCEFILES=src/main.c src/adc.c src/timers.c src/uart_debug.c src/DEE Emulation 16-bit.c src/Flash Operations.s src/i2c.c src/io.c
 
 
 
@@ -119,24 +119,6 @@ ${OBJECTDIR}/src/uart_debug.o: src/uart_debug.c  .generated_files/cee47c4fee9874
 	@${RM} ${OBJECTDIR}/src/uart_debug.o 
 	${MP_CC} $(MP_EXTRA_CC_PRE)  src/uart_debug.c  -o ${OBJECTDIR}/src/uart_debug.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/src/uart_debug.o.d"      -g -D__DEBUG     -omf=elf -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -I"include" -O0 -I"include" -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
 	
-${OBJECTDIR}/src/uart.o: src/uart.c  .generated_files/990ef476fd15a227cd57756b9398622de67e9197.flag .generated_files/35713b39c1b4ae317f752aef53a0b681fac576c7.flag
-	@${MKDIR} "${OBJECTDIR}/src" 
-	@${RM} ${OBJECTDIR}/src/uart.o.d 
-	@${RM} ${OBJECTDIR}/src/uart.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  src/uart.c  -o ${OBJECTDIR}/src/uart.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/src/uart.o.d"      -g -D__DEBUG     -omf=elf -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -I"include" -O0 -I"include" -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
-	
-${OBJECTDIR}/src/tables.o: src/tables.c  .generated_files/648e0edc8bd5eba73fc0a6be7252b0ec136aa7c.flag .generated_files/35713b39c1b4ae317f752aef53a0b681fac576c7.flag
-	@${MKDIR} "${OBJECTDIR}/src" 
-	@${RM} ${OBJECTDIR}/src/tables.o.d 
-	@${RM} ${OBJECTDIR}/src/tables.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  src/tables.c  -o ${OBJECTDIR}/src/tables.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/src/tables.o.d"      -g -D__DEBUG     -omf=elf -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -I"include" -O0 -I"include" -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
-	
-${OBJECTDIR}/src/math.o: src/math.c  .generated_files/3b94057f812613c7ba17a6aa2b45e8eed8924477.flag .generated_files/35713b39c1b4ae317f752aef53a0b681fac576c7.flag
-	@${MKDIR} "${OBJECTDIR}/src" 
-	@${RM} ${OBJECTDIR}/src/math.o.d 
-	@${RM} ${OBJECTDIR}/src/math.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  src/math.c  -o ${OBJECTDIR}/src/math.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/src/math.o.d"      -g -D__DEBUG     -omf=elf -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -I"include" -O0 -I"include" -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
-	
 ${OBJECTDIR}/src/DEE\ Emulation\ 16-bit.o: src/DEE\ Emulation\ 16-bit.c  .generated_files/46fcd9f00dc1d289b1ad7237a56894e76bd6f21e.flag .generated_files/35713b39c1b4ae317f752aef53a0b681fac576c7.flag
 	@${MKDIR} "${OBJECTDIR}/src" 
 	@${RM} "${OBJECTDIR}/src/DEE Emulation 16-bit.o".d 
@@ -179,24 +161,6 @@ ${OBJECTDIR}/src/uart_debug.o: src/uart_debug.c  .generated_files/bf6958cf357c75
 	@${RM} ${OBJECTDIR}/src/uart_debug.o.d 
 	@${RM} ${OBJECTDIR}/src/uart_debug.o 
 	${MP_CC} $(MP_EXTRA_CC_PRE)  src/uart_debug.c  -o ${OBJECTDIR}/src/uart_debug.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/src/uart_debug.o.d"        -g -omf=elf -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -I"include" -O0 -I"include" -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
-	
-${OBJECTDIR}/src/uart.o: src/uart.c  .generated_files/e20c1ffbfc033b66a67d5fc6459378ededa1a8bc.flag .generated_files/35713b39c1b4ae317f752aef53a0b681fac576c7.flag
-	@${MKDIR} "${OBJECTDIR}/src" 
-	@${RM} ${OBJECTDIR}/src/uart.o.d 
-	@${RM} ${OBJECTDIR}/src/uart.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  src/uart.c  -o ${OBJECTDIR}/src/uart.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/src/uart.o.d"        -g -omf=elf -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -I"include" -O0 -I"include" -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
-	
-${OBJECTDIR}/src/tables.o: src/tables.c  .generated_files/a9791b7a5374a0dbb2a9fb53aa896b90b1e38f7e.flag .generated_files/35713b39c1b4ae317f752aef53a0b681fac576c7.flag
-	@${MKDIR} "${OBJECTDIR}/src" 
-	@${RM} ${OBJECTDIR}/src/tables.o.d 
-	@${RM} ${OBJECTDIR}/src/tables.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  src/tables.c  -o ${OBJECTDIR}/src/tables.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/src/tables.o.d"        -g -omf=elf -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -I"include" -O0 -I"include" -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
-	
-${OBJECTDIR}/src/math.o: src/math.c  .generated_files/17144afa1684ee2070fbaf348f5998f85d0eb354.flag .generated_files/35713b39c1b4ae317f752aef53a0b681fac576c7.flag
-	@${MKDIR} "${OBJECTDIR}/src" 
-	@${RM} ${OBJECTDIR}/src/math.o.d 
-	@${RM} ${OBJECTDIR}/src/math.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  src/math.c  -o ${OBJECTDIR}/src/math.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/src/math.o.d"        -g -omf=elf -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -I"include" -O0 -I"include" -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
 	
 ${OBJECTDIR}/src/DEE\ Emulation\ 16-bit.o: src/DEE\ Emulation\ 16-bit.c  .generated_files/f685e0cf88db14db462868f6358b75be964452fe.flag .generated_files/35713b39c1b4ae317f752aef53a0b681fac576c7.flag
 	@${MKDIR} "${OBJECTDIR}/src" 
